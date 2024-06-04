@@ -1,0 +1,45 @@
+{% extends "base.html" %} {% load crispy_forms_tags %} {% block css_add %}
+<style>
+    .btn-success:hover {
+        background-color: #ff0004;
+    }
+
+    body {
+        background-color: rgb(211, 243, 244);
+    }
+</style>
+{% endblock %} {% block main %}
+<h1 class="text-center p-3 text-primary">Sign - Up First</h1>
+
+<div>
+    <form method="post" style="width: 50%; margin: auto" novalidate>
+        {% csrf_token %} {% for field in data %}
+        <!-- {{data | crispy }} -->
+        <!-- <div class="form-group p-2"> -->
+        {{ field.label_tag }} {{ field }} 
+        <!-- </div> -->
+        {% if field.errors %}
+         <div class="errorlist">
+            {% for error in field.errors %}
+            <p class="text-danger">{{ error }}</p>
+            {% endfor %}
+        </div>
+        {% endif %} {% if form.non_field_errors %}
+        <div class="errorlist">
+            {% for error in form.non_field_errors %}
+            <p class="text-danger">{{ error }}</p>
+            {% endfor %}
+        </div>
+        {% endif %} {% endfor %}
+
+        <br />
+        <!-- <button class="btn btn-success" >Submit</button> -->
+         <input type="submit" value="submit" >  
+
+
+        <br />
+    </form>
+
+    <br /><br />
+</div>
+{% endblock %}
